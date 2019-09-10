@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="rlgdemo2:war">
+    <output-path>$PROJECT_DIR$/rlgdemo2/target</output-path>
+    <root id="archive" name="rlgdemo2.war">
+      <element id="artifact" artifact-name="rlgdemo2:war exploded" />
+    </root>
+  </artifact>
+</component>
