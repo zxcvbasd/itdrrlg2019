@@ -1,5 +1,7 @@
 package com.itdr.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Users {
@@ -17,8 +19,9 @@ public class Users {
 
     private String answer;
 
-    private Integer role;
+    private Integer role = 1;
 
+    @JsonFormat(locale = "zh",timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     private Date updateTime;
