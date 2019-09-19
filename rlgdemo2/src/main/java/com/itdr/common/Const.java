@@ -14,6 +14,13 @@ public class Const {
 //    失败时通用状态码
     public static final int ERROR=100;
 
+    public interface Cart{
+        String LIMITQUANTITYSUCCESS="LIMIT_NUM_SUCCESS";
+        String LIMITQUANTITYFAILED="LIMIT_NUM_SUCCESS";
+        Integer CHECK=1;
+        Integer UNCHECK=0;
+    }
+
     public enum UsersEnum{
         NEED_LOGIN(2,"需要登录"),
         NO_LOGIN(101,"用户未登录");
