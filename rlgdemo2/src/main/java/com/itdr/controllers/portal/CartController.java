@@ -2,7 +2,6 @@ package com.itdr.controllers.portal;
 
 import com.itdr.common.Const;
 import com.itdr.common.ServerResponse;
-import com.itdr.pojo.Product;
 import com.itdr.pojo.Users;
 import com.itdr.pojo.vo.CartVO;
 import com.itdr.services.CartService;

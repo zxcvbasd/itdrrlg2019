@@ -132,8 +132,8 @@
     <update id="selectOrUnSelect" parameterType="map">
       update neuedu_cart
       set
-      checked = #{check,jdbcType=INTEGER},
-      update_time = now()
+      checked = #{check,jdbcType=INTEGER}
+--       update_time = now()
       where user_id = #{id,jdbcType=INTEGER}
       <if test="productId != null">
           and product_id = #{productId}
@@ -142,10 +142,12 @@
 
     <!--根据ID更新购物车-->
     <update id="updateById" parameterType="com.itdr.pojo.Cart">
-        update neuedu_cart set
-        <if test="quantity != null">
-            quantity = #{quantity,jdbcType=INTEGER},
-        </if>
+        update neuedu_cart
+        <set>
+            <if test="quantity != null">
+                quantity = #{quantity,jdbcType=INTEGER},
+            </if>
+        </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
 

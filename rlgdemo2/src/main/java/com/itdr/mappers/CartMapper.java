@@ -22,7 +22,7 @@ public interface CartMapper {
     Cart selectByUidAndProductID(@Param("uid") Integer uid, @Param("productId") Integer productId);
 
     //根据用户ID查询所有购物数据
-    List<Cart> selectByUid(@Param("uid") Integer uid);
+    List<Cart> selectByUid(Integer uid);
 
     //根据用户ID判断用户购物车是否全选
     int selectByUidCheck(@Param("uid") Integer uid, @Param("check") Integer check);

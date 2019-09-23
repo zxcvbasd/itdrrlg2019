@@ -3,7 +3,7 @@ package com.itdr.pojo;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Orderitem {
+public class OrderItem {
     private Integer id;
 
     private Integer userId;

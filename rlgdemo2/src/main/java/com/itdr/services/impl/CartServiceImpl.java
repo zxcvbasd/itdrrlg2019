@@ -38,11 +38,6 @@ public class CartServiceImpl implements CartService {
         }
 
         //向购物车表中存储数据
-        //创建一个Cart对象
-//        Cart c = new Cart();
-//        c.setUserId(uid);
-//        c.setProductId(productId);
-//        c.setQuantity(count);
 
         //如果有这条购物信息，就是更新购物数量，如果没有才是插入新数据
         Cart c2 = cartMapper.selectByUidAndProductID(uid, productId);
@@ -96,7 +91,7 @@ public class CartServiceImpl implements CartService {
                 Cart cartForQuantity = new Cart();
                 cartForQuantity.setId(cart.getId());
                 cartForQuantity.setQuantity(cartProductVO.getQuantity());
-//                cartMapper.updateById(cartForQuantity);
+                cartMapper.updateById(cartForQuantity);
 
                 //计算购物车总价
                 if (cart.getChecked() == Const.Cart.CHECK) {
