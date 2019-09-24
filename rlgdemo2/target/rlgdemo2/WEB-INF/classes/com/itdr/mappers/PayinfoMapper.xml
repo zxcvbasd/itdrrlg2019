@@ -25,14 +25,17 @@
     delete from neuedu_payinfo
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
+  <!--插入一条支付信息-->
   <insert id="insert" parameterType="com.itdr.pojo.Payinfo" >
     insert into neuedu_payinfo (id, user_id, order_no, 
       pay_platform, platform_number, platform_status, 
       create_time, update_time)
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{orderNo,jdbcType=BIGINT}, 
+    values (null, #{userId,jdbcType=INTEGER}, #{orderNo,jdbcType=BIGINT},
       #{payPlatform,jdbcType=INTEGER}, #{platformNumber,jdbcType=VARCHAR}, #{platformStatus,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+      now(),now())
   </insert>
+
   <insert id="insertSelective" parameterType="com.itdr.pojo.Payinfo" >
     insert into neuedu_payinfo
     <trim prefix="(" suffix=")" suffixOverrides="," >

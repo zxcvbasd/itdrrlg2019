@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.itdr.mappers.OrderitemMapper" >
-  <resultMap id="BaseResultMap" type="com.itdr.pojo.Orderitem" >
+  <resultMap id="BaseResultMap" type="com.itdr.pojo.OrderItem" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="order_no" property="orderNo" jdbcType="BIGINT" />
@@ -28,7 +28,7 @@
     delete from neuedu_order_item
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.itdr.pojo.Orderitem" >
+  <insert id="insert" parameterType="com.itdr.pojo.OrderItem" >
     insert into neuedu_order_item (id, user_id, order_no, 
       product_id, product_name, product_image, 
       current_unit_price, quantity, total_price, 
@@ -38,7 +38,7 @@
       #{currentUnitPrice,jdbcType=DECIMAL}, #{quantity,jdbcType=INTEGER}, #{totalPrice,jdbcType=DECIMAL}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.itdr.pojo.Orderitem" >
+  <insert id="insertSelective" parameterType="com.itdr.pojo.OrderItem" >
     insert into neuedu_order_item
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -111,7 +111,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.itdr.pojo.Orderitem" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.itdr.pojo.OrderItem" >
     update neuedu_order_item
     <set >
       <if test="userId != null" >
@@ -147,7 +147,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.itdr.pojo.Orderitem" >
+  <update id="updateByPrimaryKey" parameterType="com.itdr.pojo.OrderItem" >
     update neuedu_order_item
     set user_id = #{userId,jdbcType=INTEGER},
       order_no = #{orderNo,jdbcType=BIGINT},
@@ -161,4 +161,26 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--根据订单号查对应商品详情-->
+  <select id="selectByOrderNo" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select
+    <include refid="Base_Column_List"/>
+    from neuedu_order_item
+    where order_no = #{oid}
+  </select>
+
+  <!---->
+  <insert id="insertAll" parameterType="list">
+    insert into neuedu_order_item
+    (user_id, order_no,
+      product_id, product_name, product_image,
+      current_unit_price, quantity, total_price,
+      create_time, update_time)
+      values
+      <foreach collection="orderItem" item="item" separator=",">
+        (#{item.userId},#{item.orderNo},#{item.productId},#{item.productName},#{item.productImage},
+        #{item.currentUnitPrice},#{item.quantity},#{item.totalPrice},now(),now())
+      </foreach>
+  </insert>
 </mapper>

@@ -28,4 +28,9 @@ public class DemoTest {
         System.out.println(a.multiply(b));
         System.out.println(a.divide(b));
     }
+
+    @Test
+    public void test3() {
+        System.out.println(Math.round(Math.random()*100));
+    }
 }

@@ -35,4 +35,9 @@ public interface CartMapper {
 
     //根据ID改变购物车中商品选中状态
     int selectOrUnSelect(@Param("id") Integer id,@Param("check") Integer check, @Param("productId") Integer productId);
+
+    List<Cart> selectByUidAll(Integer uid);
+
+    //根据ID清空购物车
+    int deleteAllByIdAndUid(@Param("li") List<Cart> li, @Param("uid") Integer uid);
 }

@@ -81,6 +81,7 @@
             </if>
         </trim>
     </insert>
+
     <update id="updateByPrimaryKeySelective" parameterType="com.itdr.pojo.Cart">
         update neuedu_cart
         <set>
@@ -91,6 +92,7 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
+
     <update id="updateByPrimaryKey" parameterType="com.itdr.pojo.Cart">
     update neuedu_cart
     set user_id = #{userId,jdbcType=INTEGER},
@@ -126,12 +128,20 @@
         where user_id=#{uid} and checked = #{check}
     </select>
 
+    <!--根据用户ID获取购物车中选中的数据-->
+    <select id="selectByUidAll" parameterType="integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from neuedu_cart
+        where user_id=#{uid} and checked = 1
+    </select>
+
     <!--根据ID改变购物车中商品选中状态-->
     <update id="selectOrUnSelect" parameterType="map">
       update neuedu_cart
       set
-      checked = #{check,jdbcType=INTEGER},
-      update_time = now()
+      checked = #{check,jdbcType=INTEGER}
+--       update_time = now()
       where user_id = #{id,jdbcType=INTEGER}
       <if test="productId != null">
           and product_id = #{productId}
@@ -140,10 +150,12 @@
 
     <!--根据ID更新购物车-->
     <update id="updateById" parameterType="com.itdr.pojo.Cart">
-        update neuedu_cart set
-        <if test="quantity != null">
-            quantity = #{quantity,jdbcType=INTEGER},
-        </if>
+        update neuedu_cart
+        <set>
+            <if test="quantity != null">
+                quantity = #{quantity,jdbcType=INTEGER},
+            </if>
+        </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
 
@@ -156,6 +168,20 @@
                 and product_id in
                 <foreach collection="productIds" item="productId" open="(" separator="," close=")">
                     #{productId}
+                </foreach>
+            </if>
+        </where>
+    </delete>
+
+    <!--根据ID清空购物车-->
+    <delete id="deleteAllByIdAndUid">
+        delete from neuedu_cart
+        <where>
+            user_id = #{uid}
+            <if test="li != null">
+                and id in
+                <foreach collection="li" item="cart" open="(" separator="," close=")">
+                    #{cart.id}
                 </foreach>
             </if>
         </where>

@@ -41,15 +41,15 @@ public class AliPayController {
     }
 
     //查询支付状态
-    @RequestMapping("query_order_pay_status.do")
-    private ServerResponse query_order_pay_status(Long orderno, HttpSession session) {
-        //用户是否登录
-        Users users = (Users) session.getAttribute(Const.LOGINUSER);
+//    @RequestMapping("query_order_pay_status.do")
+//    private ServerResponse queryOrderPayStatus(Long orderno, HttpSession session) {
+//        //用户是否登录
+//        Users users = (Users) session.getAttribute(Const.LOGINUSER);
 //        if (users == null){
 //            return ServerResponse.defeatedRS(Const.UsersEnum.NO_LOGIN.getCode(),Const.UsersEnum.NO_LOGIN.getDesc());
 //        }
-        return aliPayService.alipay(orderno, users.getId());
-    }
+//        return aliPayService.queryOrderPayStatus(orderno, users.getId());
+//    }
 
     //支付宝回调
     @RequestMapping("alipay_callback.do")

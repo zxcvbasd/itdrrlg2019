@@ -28,7 +28,7 @@ public class DateUtils {
     /**
      * string-->Date
      * */
-    public static  Date  strToDate(String str){
+    public static Date strToDate(String str){
        DateTimeFormatter dateTimeFormatter= DateTimeFormat.forPattern(STANDARD_FORMAT);
        DateTime dateTime=dateTimeFormatter.parseDateTime(str);
        return dateTime.toDate();
